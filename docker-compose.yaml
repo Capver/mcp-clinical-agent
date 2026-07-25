@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: clinical_db_postgres
+    environment:
+      POSTGRES_DB: clinical_db
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: admin_password
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - secure_network
+
+volumes:
+  pg_data:
+
+networks:
+  secure_network:
+    driver: bridge
