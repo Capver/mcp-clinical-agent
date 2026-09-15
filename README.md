@@ -124,15 +124,13 @@ The code is split by clear responsibilities—configuration, orchestration, MCP 
 
 Two consecutive, independently verified debug mode runs with `qwen3.5:9B` each scored 20 correct answers out of 20. The [primary benchmark report](benchmarks/BENCHMARK.md) documents every prompt, generated SQL, tool sequence, answer, timing, and verification result across both runs.
 
-> A 20/20 benchmark is evidence about the documented runs, not proof that the application is perfect or fully deterministic. Local model output is probabilistic: the same query may follow a different reasoning or tool path, take a different amount of time, or produce a different result on another run.
-
 ### Model and Runtime Comparison
 
 All runtime and latency figures below were measured on an NVIDIA Tesla T4 with 16 GB of VRAM. Newer GPUs can substantially reduce absolute local-inference time, so these timings should not be extrapolated directly to faster hardware.
 
 | Model and run | Thinking | Scope | Observed result | Runtime | Notable failures |
 |---|:---:|---|---:|---:|---|
-| Gemma 4 12B, first run | On | 20 questions | 20/20 | Not recorded | None observed; no preserved debug transcript |
+| Gemma 4 12B, first run | On | 20 questions | 20/20 | Not recorded | None observed |
 | Gemma 4 12B, second run | On | 20 questions | 18/20 | 24.45 min | Q8 and Q16 returned ungrounded answers without tool calls |
 | Gemma 4 12B, no-thinking run | Off | 20 questions | 18/20 | 4.28 min | Q8 and Q20 returned ungrounded answers without tool calls |
 | Qwen 3.5 9B, runs one and two | On | 20 questions x 2 | 20/20, 20/20 | 19.76, 21.81 min | None in the scored outcomes |
